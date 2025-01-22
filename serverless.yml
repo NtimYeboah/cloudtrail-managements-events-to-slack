@@ -10,8 +10,8 @@ provider:
                     Action:
                         - 'ssm:GetParameters'
                     Resource:
-                        - 'arn:aws:ssm:us-east-1:651706758333:parameter/app-dev-hello/slack-bot-user-token'
-                        - 'arn:aws:ssm:us-east-1:651706758333:parameter/app-dev-hello/slack-channel'
+                        - 'arn:aws:ssm:${self:provider.region}:${aws:accountId}:parameter/app-dev-hello/slack-bot-user-token'
+                        - 'arn:aws:ssm:${self:provider.region}:${aws:accountId}:parameter/app-dev-hello/slack-channel'
 
 plugins:
     - ./vendor/bref/bref
