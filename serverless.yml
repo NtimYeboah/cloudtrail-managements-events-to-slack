@@ -1,0 +1,43 @@
+service: app
+
+provider:
+    name: aws
+    region: us-east-1
+    iam:
+        role:
+            statements:
+                -   Effect: Allow
+                    Action:
+                        - 'ssm:GetParameters'
+                    Resource:
+                        - 'arn:aws:ssm:us-east-1:651706758333:parameter/app-dev-hello/slack-bot-user-token'
+                        - 'arn:aws:ssm:us-east-1:651706758333:parameter/app-dev-hello/slack-channel'
+
+plugins:
+    - ./vendor/bref/bref
+
+functions:
+    hello:
+        handler: index.php
+        description: ''
+        runtime: php-82
+        events:
+            - eventBridge:
+                pattern:
+                    source:
+                        - 'aws_ec2'
+                    detail-type:
+                        - 'AWS API Call via CloudTrail'
+                    detail:
+                        eventSource:
+                            - 'ec2.amazonaws.com'
+                        eventName:
+                            - 'StopInstances'
+        environment:
+            SLACK_BOT_USER_TOKEN: bref-ssm:/app-dev-hello/slack-bot-user-token
+            SLACK_CHANNEL: bref-ssm:/app-dev-hello/slack-channel
+
+# Exclude files from deployment
+package:
+    patterns:
+        - '!tests/**'
