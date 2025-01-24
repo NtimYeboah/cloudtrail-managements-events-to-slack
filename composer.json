@@ -3,5 +3,15 @@
         "bref/bref": "^2.3",
         "guzzlehttp/guzzle": "^7.0",
         "bref/secrets-loader": "^1.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
     }
 }
