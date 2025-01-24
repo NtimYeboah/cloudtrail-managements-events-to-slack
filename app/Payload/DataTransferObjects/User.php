@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace App\Event\DataTransferObjects;
+namespace App\Payload\DataTransferObjects;
 
 final class User
 {
@@ -15,7 +15,7 @@ final class User
 
     public static function fromArray(array $details): self
     {
-        return static(
+        return new static(
             $details['type'],
             $details['principalId'],
             $details['arn'],

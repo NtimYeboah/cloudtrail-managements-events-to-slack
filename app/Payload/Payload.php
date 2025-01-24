@@ -2,11 +2,11 @@
 
 namespace App\Payload;
 
-use App\Event\DataTransferObjects\Console;
-use App\Event\DataTransferObjects\User;
-use App\Event\DataTransferObjects\Event;
-use App\Event\DataTransferObjects\Session;
-use App\Event\DataTransferObjects\Tls;
+use App\Payload\DataTransferObjects\Console;
+use App\Payload\DataTransferObjects\User;
+use App\Payload\DataTransferObjects\Event;
+use App\Payload\DataTransferObjects\Session;
+use App\Payload\DataTransferObjects\Tls;
 
 class Payload
 {
@@ -159,9 +159,9 @@ class Payload
     private function initializeTls(array $details)
     {
         $this->tls = Tls::fromArray([
-            'tlsVersion' => $details['tlsVersion'],
-            'cipherSuite' => $details['cipherSuite'],
-            'clientProvidedHostHeader' => $details['clientProvidedHostHeader'],
+            'tlsVersion' => $details['tlsDetails']['tlsVersion'],
+            'cipherSuite' => $details['tlsDetails']['cipherSuite'],
+            'clientProvidedHostHeader' => $details['tlsDetails']['clientProvidedHostHeader'],
         ]);
     }
 

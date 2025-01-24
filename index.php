@@ -13,13 +13,14 @@ class EventHandler extends EventBridgeHandler
 {
     public function handleEventBridge(EventBridgeEvent $event, Context $context): void
     {
+        print_r(json_encode($event->getDetail()));
         $payload = Payload::capture($event->getDetail());
 
         $blocks = BlockFormatter::format($payload);
 
         $response = SlackNotification::send([
             'channel' => getenv('SLACK_CHANNEL'),
-            'blocks' => $blocks,
+            'blocks' => $blocks->toString(),
         ]);
 
         $responseBody = $response->getBody();

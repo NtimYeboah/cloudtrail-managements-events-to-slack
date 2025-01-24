@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace App\Event\DataTransferObjects;
+namespace App\Payload\DataTransferObjects;
 
 use DateTimeImmutable;
 
@@ -8,7 +8,7 @@ final class Event
 {
     public function __construct(
         public string $version,
-        public DateTimeImmutable $time,
+        public string $time,
         public string $source,
         public string $name,
         public string $id,
@@ -19,7 +19,7 @@ final class Event
 
     public static function fromArray(array $details): self
     {
-        return static(
+        return new static(
             $details['eventVersion'],
             $details['eventTime'],
             $details['eventSource'],
@@ -48,7 +48,7 @@ final class Event
      */
     public function time(): DateTimeImmutable
     {
-        return $this->time;
+        return DateTimeImmutable::createFromFormat('U', (string) strtotime($this->time));
     }
 
     /**

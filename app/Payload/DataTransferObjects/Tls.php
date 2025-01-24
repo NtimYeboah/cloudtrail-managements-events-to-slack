@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace App\Event\DataTransferObjects;
+namespace App\Payload\DataTransferObjects;
 
 final Class Tls
 {
@@ -12,7 +12,7 @@ final Class Tls
 
     public static function fromArray(array $details): self
     {
-        return static(
+        return new static(
             $details['tlsVersion'],
             $details['cipherSuite'],
             $details['clientProvidedHostHeader'],
