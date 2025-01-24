@@ -8,10 +8,10 @@ final class Session
 {
     public function __construct(
         public string $creationDate,
-        public bool $mfaAuthenticated,
+        public string $mfaAuthenticated,
         public string $sourceIpAddress,
         public string $userAgent,
-        public bool $sessionCredentialsFromConsole,
+        public string $sessionCredentialsFromConsole,
     ) {}
 
     public static function fromArray(array $details): self
@@ -42,7 +42,7 @@ final class Session
      */
     public function mfaAuthenticated(): bool
     {
-        return $this->mfaAuthenticated;
+        return $this->mfaAuthenticated === 'true';
     }
 
     /**
@@ -72,6 +72,6 @@ final class Session
      */
     public function sessionCredentialsFromConsole(): bool
     {
-        return $this->sessionCredentialsFromConsole;
+        return $this->sessionCredentialsFromConsole === 'true';
     }
 }

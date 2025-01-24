@@ -13,7 +13,6 @@ class EventHandler extends EventBridgeHandler
 {
     public function handleEventBridge(EventBridgeEvent $event, Context $context): void
     {
-        print_r(json_encode($event->getDetail()));
         $payload = Payload::capture($event->getDetail());
 
         $blocks = BlockFormatter::format($payload);

@@ -22,7 +22,7 @@ class BlocksTest extends TestCase
                 "sessionContext" => [
                     "attributes" => [
                         "creationDate" => "2025-01-24T08:25:27Z", 
-                        "mfaAuthenticated" => true 
+                        "mfaAuthenticated" => "true"
                     ] 
                 ]
             ], 
@@ -72,7 +72,7 @@ class BlocksTest extends TestCase
                 "cipherSuite" => "TLS_AES_128_GCM_SHA256", 
                 "clientProvidedHostHeader" => "ec2.us-east-1.amazonaws.com" 
             ], 
-            "sessionCredentialFromConsole" => true
+            "sessionCredentialFromConsole" => "true"
         ]; 
 
         $payload = Payload::capture($eventDetails);

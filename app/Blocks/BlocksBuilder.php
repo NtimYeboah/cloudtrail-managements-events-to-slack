@@ -29,7 +29,7 @@ class BlocksBuilder
 
         if (!empty($fieldsText)) {
             foreach ($fieldsText as $text) {
-                $sectionBlock['fields'] = [
+                $sectionBlock['fields'][] = [
                     "type" => "mrkdwn",
                     "text" => $text,
                 ];

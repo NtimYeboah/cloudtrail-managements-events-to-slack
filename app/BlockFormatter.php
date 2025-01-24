@@ -45,7 +45,7 @@ class BlockFormatter
         return $builder->header($this->header())
                     ->context($this->context())
                     ->section([
-                        //$this->field("*Event Time:*\n".$this->payload->event()->time()->dateTimeString()),
+                        $this->field("*Event Time:*\n".$this->payload->event()->time()->format('l, F j, Y')),
                         $this->field("*Event Name:*\n".$this->payload->event()->name()),
                         $this->field("*Event Source:*\n".$this->payload->event()->source())
                     ])

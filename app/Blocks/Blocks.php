@@ -5,7 +5,7 @@ namespace App\Blocks;
 class Blocks
 {
     public function __construct(
-        private array $blocks, 
+        private array $blocks
     ) {}
 
     /**
