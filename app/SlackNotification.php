@@ -19,7 +19,7 @@ class SlackNotification
      */
     public static function send(array $payload): ResponseInterface
     {
-        $self = new Static($payload);
+        $self = new static($payload);
 
         return $self->request();
     }

@@ -2,8 +2,9 @@
 
 require __DIR__ . '/vendor/autoload.php';
 
-use App\BlockFormatter;
-use App\Payload\Payload;
+use App\Message;
+use App\Notification;
+use App\Payload\EventBridgePayload;
 use App\SlackNotification;
 use Bref\Context\Context;
 use Bref\Event\EventBridge\EventBridgeEvent;
@@ -13,13 +14,13 @@ class EventHandler extends EventBridgeHandler
 {
     public function handleEventBridge(EventBridgeEvent $event, Context $context): void
     {
-        $payload = Payload::capture($event->getDetail());
+        $payload = EventBridgePayload::capture($event->getDetail());
 
-        $blocks = BlockFormatter::format($payload);
+        $message = Message::format($payload);
 
         $response = SlackNotification::send([
             'channel' => getenv('SLACK_CHANNEL'),
-            'blocks' => $blocks->toString(),
+            'blocks' => $message->toString(),
         ]);
 
         $responseBody = $response->getBody();

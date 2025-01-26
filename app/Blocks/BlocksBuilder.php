@@ -2,110 +2,70 @@
 
 namespace App\Blocks;
 
+use App\Composite\Blocks\Context;
+use App\Composite\Blocks\Divider;
+use App\Composite\Blocks\Header;
+use App\Composite\Blocks\Section;
+use Closure;
+
 class BlocksBuilder
 {
-    /** @var array */
-    private array $blocks;
+    protected array $blocks = [];
 
-    /**
-     * Slack block section.
-     *
-     * @param array|null $fieldsText
-     * @param string|null $text
-     * @return static
-     */
-    public function section(?array $fieldsText = [], ?string $text = ''): static
+    public function section(Closure $callable)
     {
-        $sectionBlock = [
-            "type" => "section",
-        ];
+        $section = $callable(new Section);
 
-        if ($text) {
-            $sectionBlock['text'] = [
-                "type" => "plain_text",
-                "text" => $text
-            ];
-        }
-
-        if (!empty($fieldsText)) {
-            foreach ($fieldsText as $text) {
-                $sectionBlock['fields'][] = [
-                    "type" => "mrkdwn",
-                    "text" => $text,
-                ];
-            }
-        }
-
-        $this->blocks[] = $sectionBlock;
+        $this->blocks[] = $section->render();
 
         return $this;
     }
 
-    /**
-     * Slack block header.
-     *
-     * @param string $text
-     * @return static
-     */
-    public function header(string $text): static
+    /* public function action(Closure $closure)
     {
-        $headerBlock = [
-            "type" => "header",
-            "text" => [
-                "type" => "plain_text",
-                "text" => $text
-            ]
-        ];
 
-        $this->blocks[] = $headerBlock;
+    } */
+
+    public function divider()
+    {
+        $this->blocks[] = (new Divider)->render();
 
         return $this;
     }
 
-    /**
-     * Slack block context.
-     *
-     * @param string $text
-     * @return static
-     */
-    public function context(string $text): static
+    /* public function image(Closure $closure)
     {
-        $contextBlock = [
-            "type" => "context",
-            "elements" => [
-                [
-                    "type" => "plain_text",
-                    "text" => $text
-                ]
-            ]
-        ];
 
-        $this->blocks[] = $contextBlock;
+    } */
+
+    public function context(Closure $callable)
+    {
+        $context = $callable(new Context);
+
+        $this->blocks[] = $context->render();
 
         return $this;
     }
 
-    /**
-     * Slack block divider.
-     *
-     * @return static
-     */
-    public function divider(): static
+    public function input(Closure $closure)
     {
-        $dividerBlock = [
-            "type" => "divider"
-        ];
 
-        $this->blocks[] = $dividerBlock;
+    }
+
+    public function header(Closure $callable)
+    {
+        $header = $callable(new Header);
+
+        $this->blocks[] = $header->render();
 
         return $this;
     }
 
-    /**
-     * Build block.
-     *
-     * @return Blocks
-     */
+    public function richText(Closure $closure)
+    {
+
+    }
+
     public function build()
     {
         return new Blocks($this->blocks);

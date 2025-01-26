@@ -13,7 +13,7 @@ class Blocks
      *
      * @return array
      */
-    public function get()
+    public function toArray()
     {
         return $this->blocks;
     }

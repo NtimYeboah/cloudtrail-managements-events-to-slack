@@ -78,7 +78,8 @@ class BlocksTest extends TestCase
         $payload = Payload::capture($eventDetails);
 
         $blocks = BlockFormatter::format($payload);
-
+        print_r(json_encode($blocks->get()));
+        print_r($blocks->get());
         $this->assertCount(6, $blocks->get());
     }
 }
