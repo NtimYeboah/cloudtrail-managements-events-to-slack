@@ -58,8 +58,8 @@ class BlocksBuilderTest extends TestCase
     public function test_can_build_a_context()
     {
         $contextBlocks = (new BlocksBuilder)
-            ->context(function (Context $section) {
-                return $section->addField(new PlainText([
+            ->context(function (Context $context) {
+                return $context->addField(new PlainText([
                     'text' => 'This is a context with a plain text'
                 ]));
             })
@@ -84,8 +84,8 @@ class BlocksBuilderTest extends TestCase
     public function test_can_build_a_header()
     {
         $headerBlocks = (new BlocksBuilder)
-            ->header(function (Header $section) {
-                return $section->addField(new PlainText([
+            ->header(function (Header $header) {
+                return $header->addField(new PlainText([
                     'text' => 'This is a header with a plain text'
                 ]));
             })
