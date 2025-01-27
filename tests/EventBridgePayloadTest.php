@@ -2,13 +2,17 @@
 
 namespace Tests;
 
-use App\BlockFormatter;
-use App\Payload\Payload;
+use App\Payload\DataTransferObjects\Console;
+use App\Payload\DataTransferObjects\Event;
+use App\Payload\DataTransferObjects\Session;
+use App\Payload\DataTransferObjects\Tls;
+use App\Payload\DataTransferObjects\User;
+use App\Payload\EventBridgePayload;
 use PHPUnit\Framework\TestCase;
 
-class BlocksTest extends TestCase
+class EventBridgePayloadTest extends TestCase
 {
-    public function test_can_blocks()
+    public function test_can_transform_event_detail()
     {
         $eventDetails = [
             "eventVersion" => "1.10", 
@@ -73,13 +77,16 @@ class BlocksTest extends TestCase
                 "clientProvidedHostHeader" => "ec2.us-east-1.amazonaws.com" 
             ], 
             "sessionCredentialFromConsole" => "true"
-        ]; 
+        ];
 
-        $payload = Payload::capture($eventDetails);
+        $payload = EventBridgePayload::capture($eventDetails);
 
-        $blocks = BlockFormatter::format($payload);
-        print_r(json_encode($blocks->get()));
-        print_r($blocks->get());
-        $this->assertCount(6, $blocks->get());
+        $this->assertInstanceOf(EventBridgePayload::class, $payload);
+
+        $this->assertInstanceOf(User::class, $payload->user());
+        $this->assertInstanceOf(Session::class, $payload->session());
+        $this->assertInstanceOf(Event::class, $payload->event());
+        $this->assertInstanceOf(Tls::class, $payload->tls());
+        $this->assertInstanceOf(Console::class, $payload->console());
     }
 }
