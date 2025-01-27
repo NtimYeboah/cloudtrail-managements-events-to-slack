@@ -2,9 +2,9 @@
 
 namespace App\Composite\Blocks\Base;
 
-use App\Composite\Block;
+use App\Composite\CompoundBlock;
 
-class Image extends Block
+class Image extends CompoundBlock
 {
     protected string $type = 'image';
 

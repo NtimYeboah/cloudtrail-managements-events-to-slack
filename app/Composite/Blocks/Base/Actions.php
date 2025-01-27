@@ -2,9 +2,9 @@
 
 namespace App\Composite\Blocks\Base;
 
-use App\Composite\Block;
+use App\Composite\CompoundBlock;
 
-class Actions extends Block
+class Actions extends CompoundBlock
 {
     protected string $type = 'actions';
 
