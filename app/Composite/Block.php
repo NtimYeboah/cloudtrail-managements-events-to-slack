@@ -4,12 +4,9 @@ namespace App\Composite;
 
 abstract class Block
 {
-    protected string $type;
+    private array $block;
+
+    protected abstract function block(): array;
 
     public abstract function render(): array;
-
-    public function type(): string
-    {
-        return $this->type;
-    }
 }

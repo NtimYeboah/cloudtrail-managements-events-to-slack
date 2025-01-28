@@ -10,11 +10,16 @@ class TextStyle extends Block
     protected const ITALIC = 'italic';
     protected const STRIKE = 'strike';
 
-    protected array $block = [
+    private array $block = [
         'style' => [],
     ];
 
     public function render(): array
+    {
+        return $this->block();
+    }
+
+    protected function block(): array
     {
         return $this->block;
     }

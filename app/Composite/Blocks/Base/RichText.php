@@ -8,7 +8,7 @@ use App\Composite\CompoundBlock;
 
 class RichText extends CompoundBlock
 {
-    private array $elements;
+    private array $elements = [];
 
     protected array $block = [
         'type' => 'rich_text',
@@ -16,12 +16,19 @@ class RichText extends CompoundBlock
 
     public function render(): array
     {
-        $this->block['elements'] = $this->elements();
+        if (count($this->elements) > 0) {
+            $this->block['elements'] = $this->elements();
+        }
 
+        return $this->block();
+    }
+
+    protected function block(): array
+    {
         return $this->block;
     }
 
-    public function text(String $text)
+    public function text(string $text)
     {
         $text = (new Text)->text($text);
 
