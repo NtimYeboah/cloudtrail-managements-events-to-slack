@@ -17,4 +17,21 @@ class HeaderTest extends TestCase
 
         $this->assertEquals($rendered, $blocks);
     }
+
+    public function test_can_render_a_header_text()
+    {
+        $rendered = (new Header)
+            ->text('This is a header text')
+            ->render();
+
+        $blocks = [
+            'type' => 'header',
+            'text' => [
+                'type' => 'plain_text',
+                'text' => 'This is a header text',
+            ],
+        ];
+
+        $this->assertEquals($rendered, $blocks);
+    }
 }

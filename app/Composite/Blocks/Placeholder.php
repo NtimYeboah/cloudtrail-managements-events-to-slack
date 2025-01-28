@@ -2,17 +2,16 @@
 
 namespace App\Composite\Blocks;
 
-use App\Composite\CompoundBlock;
+use App\Composite\Block;
 
-class Header extends CompoundBlock
+class Placeholder extends Block
 {
-    protected string $type = 'header';
+    protected string $type = 'plain_text';
 
     public function render(): array
     {
         return [
             'type' => $this->type(),
-            'text' => $this->fields(),
         ];
     }
 }
