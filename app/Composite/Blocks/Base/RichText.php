@@ -2,16 +2,83 @@
 
 namespace App\Composite\Blocks\Base;
 
-use App\Composite\Block;
+use App\Composite\Blocks\Emoji;
+use App\Composite\Blocks\Text;
+use App\Composite\CompoundBlock;
 
-class RichText extends Block
+class RichText extends CompoundBlock
 {
-    protected string $type = 'rich_text';
+    private array $elements;
+
+    protected array $block = [
+        'type' => 'rich_text',
+    ];
 
     public function render(): array
     {
+        $this->block['elements'] = $this->elements();
+
+        return $this->block;
+    }
+
+    public function text(String $text)
+    {
+        $text = (new Text)->text($text);
+
+        $this->elements[] = $text;
+
+        return $this;
+    }
+
+    public function bold()
+    {
+        $last = $this->elements[count($this->elements) - 1];
+
+        $last->bold();
+       
+        return $this;
+    }
+
+    public function italic()
+    {
+        $last = $this->elements[count($this->elements) - 1];
+
+        $last->italic();
+       
+        return $this;
+    }
+
+    public function strike()
+    {
+        $last = $this->elements[count($this->elements) - 1];
+
+        $last->strike();
+       
+        return $this;
+    }
+
+    public function emoji(string $name)
+    {
+        $text = (new Emoji)->name($name);
+
+        $this->elements[] = $text;
+
+        return $this;
+    }
+
+    protected function elements(): array
+    {
+        $texts = [];
+
+        foreach ($this->elements as $element) {
+            $texts[] = $element->render();
+        }
+
         return [
-            'type' => $this->type(),
+            [
+                'type' => 'rich_text_section',
+                'elements' => $texts,
+            ]
         ];
     }
 }
