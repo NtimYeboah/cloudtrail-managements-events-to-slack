@@ -2,16 +2,28 @@
 
 namespace App\Composite\Blocks\Base;
 
-use App\Composite\CompoundBlock;
+use App\Composite\Blocks\Image as BlocksImage;
+use App\Composite\Blocks\Text;
 
-class Image extends CompoundBlock
+class Image extends BlocksImage
 {
-    protected string $type = 'image';
-
-    public function render(): array
+    public function title(string $text)
     {
-        return [
-            'type' => $this->type,
+        $text = (new Text)
+            ->text($text)
+            ->plain();
+
+        $this->block['title'] = $text->render();
+
+        return $this;
+    }
+
+    public function slackFileUrl(string $url)
+    {
+        $this->block['slack_file'] = [
+            'url' => $url,
         ];
+
+        return $this;
     }
 }

@@ -6,7 +6,7 @@ use App\Composite\Block;
 
 class Image extends Block
 {
-    private array $block = [
+    protected array $block = [
         'type' => 'image',
     ];
 
