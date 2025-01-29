@@ -10,7 +10,7 @@ class Text extends Block
     protected const MARKDOWN = 'mrkdwn';
     protected const PLAIN_TEXT = 'plain_text';
 
-    private array $block = [
+    protected array $block = [
         'type' => self::TEXT,
     ];
 

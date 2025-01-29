@@ -11,7 +11,7 @@ class Context extends CompoundBlock
 {
     private array $elements = [];
 
-    private array $block = [
+    protected array $block = [
         'type' => 'context',
     ];
 

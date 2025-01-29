@@ -12,6 +12,11 @@ class Emoji extends Block
 
     public function render(): array
     {
+        return $this->block();
+    }
+
+    protected function block(): array
+    {
         return $this->block;
     }
 

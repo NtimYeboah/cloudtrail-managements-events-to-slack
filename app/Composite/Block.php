@@ -4,7 +4,7 @@ namespace App\Composite;
 
 abstract class Block
 {
-    private array $block;
+    protected array $block;
 
     protected abstract function block(): array;
 
