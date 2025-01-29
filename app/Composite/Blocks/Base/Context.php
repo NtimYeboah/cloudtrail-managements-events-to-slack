@@ -2,8 +2,10 @@
 
 namespace App\Composite\Blocks\Base;
 
+use App\Composite\Blocks\Image;
 use App\Composite\Blocks\Text;
 use App\Composite\CompoundBlock;
+use RuntimeException;
 
 class Context extends CompoundBlock
 {
@@ -34,6 +36,28 @@ class Context extends CompoundBlock
             ->plain();
 
         $this->elements[] = $text;
+
+        return $this;
+    }
+
+    public function image(string $url)
+    {
+        $image = (new Image)->url($url);
+
+        $this->elements[] = $image;
+
+        return $this;
+    }
+
+    public function altText(string $text)
+    {
+        $last = $this->elements[count($this->elements) - 1];
+
+        if (!($last instanceof Image)) {
+            throw new RuntimeException('Specified block cannot have an alt text');
+        }
+
+        $last->altText($text);
 
         return $this;
     }
