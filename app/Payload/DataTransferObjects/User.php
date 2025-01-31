@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace App\Payload\DataTransferObjects;
+namespace NtimYeboah\Cloudtrail\Payload\DataTransferObjects;
 
 final class User
 {

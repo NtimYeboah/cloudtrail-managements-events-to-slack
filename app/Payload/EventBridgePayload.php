@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Payload;
+namespace NtimYeboah\Cloudtrail\Payload;
 
-use App\Payload\DataTransferObjects\Console;
-use App\Payload\DataTransferObjects\User;
-use App\Payload\DataTransferObjects\Event;
-use App\Payload\DataTransferObjects\Session;
-use App\Payload\DataTransferObjects\Tls;
+use NtimYeboah\Cloudtrail\Payload\DataTransferObjects\Console;
+use NtimYeboah\Cloudtrail\Payload\DataTransferObjects\User;
+use NtimYeboah\Cloudtrail\Payload\DataTransferObjects\Event;
+use NtimYeboah\Cloudtrail\Payload\DataTransferObjects\Session;
+use NtimYeboah\Cloudtrail\Payload\DataTransferObjects\Tls;
 
 class EventBridgePayload extends Payload
 {
